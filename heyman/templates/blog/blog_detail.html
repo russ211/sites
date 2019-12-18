@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}你在想什么{% endblock %}
+
+{% block content %}
+<div class="row text-center vertical-middlw-sm">
+    <h1>{{article.title}}</h1>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-md-8">
+        <p class="text-center">
+            <span>{{article.author.username}}</span>
+            <span style="margin-left:20px">{{publish}}</span>
+        </p>
+        <div>
+            {{article.body}}
+        </div>
+    </div>
+    <div class="col-xs-6 col-md-4">
+        <h2>(✖ᴗ✖)</h2>
+        <p>WESTBROOK44</p>
+        <img width="300px" src="{% static 'images/testxx5.jpg'%}">
+    </div>
+</div>
+{% endblock %}

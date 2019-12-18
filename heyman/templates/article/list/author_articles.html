@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load article_tags %}
+{% block title %}articles{% endblock %}
+{% block content %}
+<div class="row text-center vertical-middle-sm">
+    <h1 style="padding: 15px">平时看书是因为求知欲，考前看书是因为求生欲。</h1>
+</div>
+<div class="container">
+<!--    <div class="col-md-8">-->
+        {% for article in articles %}
+        <div class="list-group">
+            <a href="{{article.get_url_path}}" class="list-group-item active">
+            <h4 class="list-group-item-heading">{{article.title}}</h4>
+            <p class="list-group-item-text">{{article.author.username}}</p>
+        </a>
+<!--            <a href="{{article.get_url_path}}" class="list-group-item active"></a>-->
+<!--                <h4 class="list-group-item-heading">{{article.title}}</h4>-->
+<!--            <p class="list-group-item-text">概要:{{article.body|slice:'70'|linebreaks}} </p>-->
+        </div>
+        {% endfor %}
+        {% include "paginator.html" %}
+<!--    </div>-->
+<!--    <div class="col-md-4">-->
+    <div style="float: right">
+        <div>
+            {% if userinfo.photo %}
+            <img src="{{ MEDIA_URL }}{{ userinfo.photo }}" class="img-circle" id="my_photo" name="user_face" style="width: 300px">
+            {% else %}
+            <img name="user_face" src="{% static 'images/testxx5.jpg' %}" class="img-circle" id="my_photo" style="width: 300px">
+            {% endif %}
+        </div>
+        <div>
+            <p>{{ user.username }}</p>
+            <p>共发表{% author_total_articles user %}篇文章</p>
+            {% if userinfo %}
+            <p>{{ userinfo.school }}</p>
+            <p>{{ userinfo.aboutme }}</p>
+            {% else %}
+            <p>这个作者太懒了，什么也没有留下。</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
